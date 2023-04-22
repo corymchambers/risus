@@ -1,33 +1,40 @@
 import React, {useContext} from 'react';
 import {View, Text, Button} from 'react-native';
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import OnboardingScreen from '../screens/auth/OnboardingScreen';
 import LoginScreen from '../screens/auth/LoginScreen';
 import TermsScreen from '../screens/auth/TermsScreen';
 import AuthContext from '../auth/authContext';
-
-function HomeScreen({navigation}) {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-    </View>
-  );
-}
+import FeedScreen from '../screens/FeedScreen';
+import CustomTab from './CustomTab';
 
 function DetailsScreen({navigation}) {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>Details Screen</Text>
-      <Button
-        title="Go to Home"
-        onPress={() => navigation.navigate('Onboarding')}
-      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Feed')} />
+    </View>
+  );
+}
+
+function SearchScreen({navigation}) {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Search Screen</Text>
+      <Button title="Go to Home" onPress={() => navigation.navigate('Feed')} />
+    </View>
+  );
+}
+
+function TrendingScreen({navigation}) {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Trending Screen</Text>
+      <Button title="Go to Home" onPress={() => navigation.navigate('Feed')} />
     </View>
   );
 }
@@ -41,9 +48,15 @@ function Navigator() {
   return (
     <NavigationContainer>
       {onboarded ? (
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Navigator
+          screenOptions={allProps => ({
+            tabBarButton: () => <CustomTab props={allProps} />,
+            tabBarStyle: {backgroundColor: '#000007'},
+          })}>
+          <Tab.Screen name="Feed" component={FeedScreen} />
           <Tab.Screen name="Details" component={DetailsScreen} />
+          <Tab.Screen name="Search" component={SearchScreen} />
+          <Tab.Screen name="Trending" component={TrendingScreen} />
         </Tab.Navigator>
       ) : (
         <Stack.Navigator screenOptions={{headerShown: false}}>
