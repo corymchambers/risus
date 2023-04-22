@@ -1827,6 +1827,21 @@
   "resolved" "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.5.tgz"
   "version" "15.7.5"
 
+"@types/react-native-onboarding-swiper@^1.1.4":
+  "integrity" "sha512-Ca+s0bFb0M8al3UeNAsbrO5ezGya9FqSvZTWVOK0JdNZydohrlwmrTHc61eWYlW992H0O2MTB1hiAx6vpOL+cQ=="
+  "resolved" "https://registry.npmjs.org/@types/react-native-onboarding-swiper/-/react-native-onboarding-swiper-1.1.4.tgz"
+  "version" "1.1.4"
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
+"@types/react-native@*":
+  "integrity" "sha512-eCqEZ+GhW9L9o6yVoPqCCAq8Sbd6liaKlh6WviD0X7O035NEe7VQ+q9KXYL+mhyZrLI5sbX7f3G973gG6fuiyQ=="
+  "resolved" "https://registry.npmjs.org/@types/react-native/-/react-native-0.71.6.tgz"
+  "version" "0.71.6"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-test-renderer@^18.0.0":
   "integrity" "sha512-C7/5FBJ3g3sqUahguGi03O79b8afNeSD6T8/GU50oQrJCU0bVCCGQHaGKUbg2Ce8VQEEqTw8/HiS6lXHHdgkdQ=="
   "resolved" "https://registry.npmjs.org/@types/react-test-renderer/-/react-test-renderer-18.0.0.tgz"
