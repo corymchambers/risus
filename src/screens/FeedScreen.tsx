@@ -1,12 +1,16 @@
 import React, {ReactElement} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import { DrawerActions } from '@react-navigation/native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-export default function FeedScreen(props): ReactElement {
+export default function FeedScreen({navigation}): ReactElement {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+      style={styles.container}>
       <Ionicons name="home" size={32} />
-    </View>
+    </TouchableOpacity>
   );
 }
 
