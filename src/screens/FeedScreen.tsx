@@ -1,10 +1,15 @@
 import React, {ReactElement} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import { DrawerActions } from '@react-navigation/native';
+import {TouchableOpacity, StyleSheet} from 'react-native';
 
+import {DrawerActions} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-export default function FeedScreen({navigation}): ReactElement {
+
+import {ScreenProps} from '../navigation/navTypes';
+import {Routes} from '../navigation/routes';
+
+export default function FeedScreen({
+  navigation,
+}: ScreenProps<Routes.FeedScreen>): ReactElement {
   return (
     <TouchableOpacity
       onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
