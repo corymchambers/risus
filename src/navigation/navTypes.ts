@@ -14,6 +14,7 @@ export type RootStackParamList = {
   OnboardingScreen: undefined;
   SearchScreen: undefined;
   TermsScreen: undefined;
+  ThemesScreen: undefined;
   TrendingScreen: undefined;
 };
 

@@ -5,5 +5,6 @@ export enum Routes {
   OnboardingScreen = 'OnboardingScreen',
   SearchScreen = 'SearchScreen',
   TermsScreen = 'TermsScreen',
+  ThemesScreen = 'ThemesScreen',
   TrendingScreen = 'TrendingScreen',
 }

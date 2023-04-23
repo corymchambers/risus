@@ -19,6 +19,7 @@ import {RootStackParamList} from './navTypes';
 import DrawerIcon from './DrawerIcon';
 import DrawerContent from './DrawerContent';
 import {useAppSelector} from '../redux/hooks';
+import ThemesScreen from '../screens/ThemesScreen';
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -31,10 +32,28 @@ function DrawerNav() {
       screenOptions={() => ({
         headerShown: false,
       })}>
-      <Drawer.Screen name="Tabs" component={TabNav} />
+      <Drawer.Screen name="Stack" component={StackNavigator} />
     </Drawer.Navigator>
   );
 }
+
+const StackNavigator = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={() => ({
+        headerShown: false,
+      })}>
+      <Stack.Screen name="Tabs" component={TabNav} />
+      <Stack.Screen
+        name={Routes.ThemesScreen}
+        component={ThemesScreen}
+        options={() => ({
+          headerShown: true,
+        })}
+      />
+    </Stack.Navigator>
+  );
+};
 
 function TabNav() {
   const theme = useAppSelector(state => state.theme.theme);
@@ -43,7 +62,7 @@ function TabNav() {
     <Tab.Navigator
       screenOptions={allProps => ({
         tabBarButton: () => <CustomTab props={allProps} />,
-        tabBarStyle: {backgroundColor: theme.color1},
+        tabBarStyle: {backgroundColor: theme.color1, height: 80},
         headerStyle: {
           backgroundColor: theme.color2,
         },
