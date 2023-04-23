@@ -1,17 +1,25 @@
-import {useNavigation} from '@react-navigation/native';
 import React, {ReactElement} from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, StyleSheet} from 'react-native';
 
-export default function DrawerIcon(props): ReactElement {
+import {useNavigation} from '@react-navigation/native';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Colors} from '../styles';
+
+export default function DrawerIcon(): ReactElement {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={navigation.toggleDrawer}>
-      <Text>X</Text>
+    <TouchableOpacity
+      onPress={navigation.toggleDrawer}
+      style={styles.container}>
+      <Ionicons name="menu" size={32} color={Colors.ORANGE} />
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginLeft: 8,
+  },
 });

@@ -3,7 +3,7 @@ import React, {useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator, DrawerContent} from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import OnboardingScreen from '../screens/auth/OnboardingScreen';
 import LoginScreen from '../screens/auth/LoginScreen';
@@ -16,6 +16,9 @@ import SearchScreen from '../screens/SearchScreen';
 import TrendingScreen from '../screens/TrendingScreen';
 import {Routes} from './routes';
 import {RootStackParamList} from './navTypes';
+import DrawerIcon from './DrawerIcon';
+import {Colors} from '../styles';
+import DrawerContent from './DrawerContent';
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -28,9 +31,7 @@ function DrawerNav() {
       screenOptions={() => ({
         headerShown: false,
       })}>
-      <Drawer.Screen name="Main" component={TabNav} />
-      <Drawer.Screen name={Routes.FeedScreen} component={FeedScreen} />
-      <Drawer.Screen name={Routes.MessagesScreen} component={MessagesScreen} />
+      <Drawer.Screen name="Tabs" component={TabNav} />
     </Drawer.Navigator>
   );
 }
@@ -41,11 +42,43 @@ function TabNav() {
       screenOptions={allProps => ({
         tabBarButton: () => <CustomTab props={allProps} />,
         tabBarStyle: {backgroundColor: '#000007'},
+        headerStyle: {
+          backgroundColor: Colors.GREEN,
+        },
+        headerTintColor: Colors.ORANGE,
       })}>
-      <Tab.Screen name={Routes.FeedScreen} component={FeedScreen} />
-      <Tab.Screen name={Routes.MessagesScreen} component={MessagesScreen} />
-      <Tab.Screen name={Routes.SearchScreen} component={SearchScreen} />
-      <Tab.Screen name={Routes.TrendingScreen} component={TrendingScreen} />
+      <Tab.Screen
+        name={Routes.FeedScreen}
+        component={FeedScreen}
+        options={{
+          title: 'Feed',
+          headerLeft: DrawerIcon,
+        }}
+      />
+      <Tab.Screen
+        name={Routes.MessagesScreen}
+        component={MessagesScreen}
+        options={{
+          title: 'Messages',
+          headerLeft: DrawerIcon,
+        }}
+      />
+      <Tab.Screen
+        name={Routes.SearchScreen}
+        component={SearchScreen}
+        options={{
+          title: 'Search',
+          headerLeft: DrawerIcon,
+        }}
+      />
+      <Tab.Screen
+        name={Routes.TrendingScreen}
+        component={TrendingScreen}
+        options={{
+          title: 'Trending',
+          headerLeft: DrawerIcon,
+        }}
+      />
     </Tab.Navigator>
   );
 }

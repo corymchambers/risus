@@ -1,17 +1,40 @@
 import React, {ReactElement} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet, Image} from 'react-native';
 
-export default function DrawerContent(props): ReactElement {
+import {DrawerContentScrollView} from '@react-navigation/drawer';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+
+import {Colors} from '../styles';
+
+export default function DrawerContent(): ReactElement {
+  const insets = useSafeAreaInsets();
+  const paddingTop = insets.top;
+
   return (
-    <View>
-      <Text>Custom Drawer</Text>
-      <Text>Drawer Item 1</Text>
-      <Text>Drawer Item 2</Text>
-      <Text>Drawer Item 3</Text>
-    </View>
+    <DrawerContentScrollView
+      contentContainerStyle={[styles.container, {paddingTop}]}>
+      <Image
+        source={require('../assets/images/logo-small.png')}
+        style={styles.image}
+        resizeMode="contain"
+      />
+      <Text style={styles.itemText}>Drawer Item 1</Text>
+      <Text style={styles.itemText}>Drawer Item 2asdfwd</Text>
+      <Text style={styles.itemText}>Drawer Item 3asdfasdfsd</Text>
+    </DrawerContentScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    backgroundColor: Colors.BLACK,
+  },
+  image: {
+    width: '90%',
+    alignSelf: 'center',
+  },
+  itemText: {
+    color: 'white',
+  },
 });

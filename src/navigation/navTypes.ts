@@ -9,7 +9,7 @@ declare global {
 export type RootStackParamList = {
   FeedScreen: undefined;
   LoginScreen: undefined;
-  Main: undefined;
+  Tabs: undefined;
   MessagesScreen: undefined;
   OnboardingScreen: undefined;
   SearchScreen: undefined;
