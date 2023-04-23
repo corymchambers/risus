@@ -17,8 +17,8 @@ import TrendingScreen from '../screens/TrendingScreen';
 import {Routes} from './routes';
 import {RootStackParamList} from './navTypes';
 import DrawerIcon from './DrawerIcon';
-import {Colors} from '../styles';
 import DrawerContent from './DrawerContent';
+import {useAppSelector} from '../redux/hooks';
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -37,15 +37,17 @@ function DrawerNav() {
 }
 
 function TabNav() {
+  const theme = useAppSelector(state => state.theme.theme);
+
   return (
     <Tab.Navigator
       screenOptions={allProps => ({
         tabBarButton: () => <CustomTab props={allProps} />,
-        tabBarStyle: {backgroundColor: '#000007'},
+        tabBarStyle: {backgroundColor: theme.color1},
         headerStyle: {
-          backgroundColor: Colors.GREEN,
+          backgroundColor: theme.color2,
         },
-        headerTintColor: Colors.ORANGE,
+        headerTintColor: theme.color5,
       })}>
       <Tab.Screen
         name={Routes.FeedScreen}

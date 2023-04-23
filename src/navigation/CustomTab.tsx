@@ -3,8 +3,8 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {useNavigation} from '@react-navigation/core';
 
-import {Colors} from '../styles';
 import {tabs} from './tabs';
+import {useAppSelector} from '../redux/hooks';
 
 interface Props {
   props: {
@@ -20,21 +20,26 @@ const Icon = ({IconType, iconName, fontSize, fontColor}: any) => (
 );
 
 export default function CustomTab({props}: Props): ReactElement {
+  const theme = useAppSelector(state => state.theme.theme);
+
   const routeName: any = props?.route?.name;
   const navigation = useNavigation();
   const fontSize = 32;
-  const fontColor = props?.navigation?.isFocused() ? '#e28e33' : '#736038';
+  const fontColor = props?.navigation?.isFocused()
+    ? theme.color5
+    : theme.color3;
   const onPress = () => {
     navigation.navigate(routeName as never);
   };
+  const borderColor = theme.color3;
 
   const tabInfo = tabs[routeName];
   return (
-    <TouchableOpacity style={[styles.container]} onPress={onPress}>
+    <TouchableOpacity style={[styles.container, {}]} onPress={onPress}>
       <View
         style={[
           styles.innerContainer,
-          {borderRightWidth: tabInfo.borderRightWidth},
+          {borderRightWidth: tabInfo.borderRightWidth, borderColor},
         ]}>
         <Icon
           IconType={tabInfo.icon}
@@ -50,14 +55,12 @@ export default function CustomTab({props}: Props): ReactElement {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.BLACK,
     flex: 1,
     height: 68,
     justifyContent: 'center',
   },
   innerContainer: {
     alignItems: 'center',
-    borderColor: Colors.LIGHT_GREEN,
   },
   label: {
     color: 'white',
