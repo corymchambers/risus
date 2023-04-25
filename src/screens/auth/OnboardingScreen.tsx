@@ -2,6 +2,7 @@ import React, {ReactElement} from 'react';
 import {StyleSheet, Image} from 'react-native';
 
 import Onboarding from 'react-native-onboarding-swiper';
+import { Routes } from '../../navigation/routes';
 
 interface Props {
   markOnboarded: () => void;
@@ -11,7 +12,7 @@ export default function OnboardingScreen({navigation}): ReactElement {
   const doneOnboarding = () => {
     // console.log('done');
     // markOnboarded();
-    navigation.navigate('Login');
+    navigation.navigate(Routes.LoginScreen);
   };
   return (
     <Onboarding

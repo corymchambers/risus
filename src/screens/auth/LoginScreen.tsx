@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import AppButton from '../../components/AppButton';
+import {Routes} from '../../navigation/routes';
 
 export default function LoginScreen({navigation}): ReactElement {
   return (
@@ -26,7 +27,7 @@ export default function LoginScreen({navigation}): ReactElement {
           <View style={styles.innerContainer}>
             <AppButton
               title="Continue as Guest"
-              onPress={() => navigation.navigate('Terms')}
+              onPress={() => navigation.navigate(Routes.TermsScreen)}
             />
           </View>
           <View style={styles.innerContainer}>

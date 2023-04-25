@@ -10,12 +10,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "@flyerhq/react-native-link-preview": "^1.6.0",
     "@react-native-async-storage/async-storage": "^1.18.1",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/drawer": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@reduxjs/toolkit": "^1.9.5",
+    "nostr-tools": "^1.10.1",
     "react": "18.2.0",
     "react-native": "0.71.7",
     "react-native-gesture-handler": "^2.9.0",
@@ -25,7 +27,9 @@
     "react-native-screens": "^3.20.0",
     "react-native-splash-screen": "^3.3.0",
     "react-native-vector-icons": "^9.2.0",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "text-encoding-polyfill": "^0.6.7",
+    "use-debounce": "^9.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
