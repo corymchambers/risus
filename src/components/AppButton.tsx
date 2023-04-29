@@ -34,5 +34,8 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 24,
+    fontFamily: 'WorkSans-Thin',
+    fontWeight: '500',
+    letterSpacing: 0.5,
   },
 });

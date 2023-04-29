@@ -1,0 +1,21 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/WorkSans-ExtraLight.otf",
+      "sha1": "672c909c504ed20203e8d79ffaf4faac9e2445db"
+    },
+    {
+      "path": "src/assets/fonts/WorkSans-Light.otf",
+      "sha1": "74810221501e10895c612a9c88175dc4219aca96"
+    },
+    {
+      "path": "src/assets/fonts/WorkSans-Regular.otf",
+      "sha1": "1b83a17e4cafb4a361cc4bb09ce9f9c390136277"
+    },
+    {
+      "path": "src/assets/fonts/WorkSans-Thin.otf",
+      "sha1": "b228d312e0b32ed3960a86554cb2573db9cbb629"
+    }
+  ]
+}
