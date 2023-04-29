@@ -3,18 +3,20 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import useFeed from '../../hooks/useFeed';
 import {useAppSelector} from '../../redux/hooks';
-import { LinkPreview } from '@flyerhq/react-native-link-preview';
+import {LinkPreview} from '@flyerhq/react-native-link-preview';
+import reactotron from 'reactotron-react-native';
 
 // create a component
 const Post = ({post}) => {
   const theme = useAppSelector(state => state.theme.theme);
   const {displayPubkey} = useFeed();
+  reactotron.log(post?.id);
 
   const regex = /https?:\/\/.*\.(?:png|jpg|jpeg|gif)/gi;
 
   // Extract the image URL from the text string
   const match = regex.exec(post?.content);
-  console.log(match);
+  // console.log(match);
 
   const name = post?.display_name ?? displayPubkey(post.pubkey);
   const image =
@@ -24,7 +26,9 @@ const Post = ({post}) => {
     .split('T')[0];
   const tags = post.tags.filter(t => t[0] === 't').map(t => t[1]);
   return (
-    <View style={[styles.container, {backgroundColor: theme.color3}]}>
+    <View
+      key={post?.id}
+      style={[styles.container, {backgroundColor: theme.color3}]}>
       {/* Profile */}
       <View style={styles.profileContainer}>
         {/* Profile pic */}

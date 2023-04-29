@@ -19,7 +19,7 @@ export const tabs: Tabs = {
     iconName: 'people',
   },
   [Routes.MessagesScreen]: {
-    label: 'Messages',
+    label: 'Chat',
     icon: MaterialCommunityIcons,
     borderRightWidth: 0.5,
     iconName: 'message',

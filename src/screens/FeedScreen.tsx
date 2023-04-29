@@ -5,11 +5,13 @@ import {FlatList} from 'react-native-gesture-handler';
 import Post from '../components/feed/Post';
 import useFeed from '../hooks/useFeed';
 import {useAppSelector} from '../redux/hooks';
+import { FlashList } from '@shopify/flash-list';
 
 export default function FeedScreen() {
   const theme = useAppSelector(state => state.theme.theme);
 
   const {feed} = useFeed();
+  // console.log({feed})
 
   // const feed = [
   //   {
@@ -59,10 +61,15 @@ export default function FeedScreen() {
   // ];
   return (
     <View style={[styles.container, {backgroundColor: theme.color1}]}>
-      <FlatList
+      {/* <FlatList
         keyExtractor={item => item.id}
         data={feed}
         renderItem={({item}) => <Post post={item} />}
+      /> */}
+      <FlashList
+        data={feed}
+        renderItem={({item}) => <Post post={item} />}
+        estimatedItemSize={200}
       />
     </View>
   );
