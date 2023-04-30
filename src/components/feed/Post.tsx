@@ -7,8 +7,8 @@ import {LinkPreview} from '@flyerhq/react-native-link-preview';
 
 // create a component
 const Post = ({post, author}) => {
-  console.log({post});
-  console.log({author});
+  // console.log({post});
+  // console.log({author});
   const theme = useAppSelector(state => state.theme.theme);
   const {displayPubkey} = useFeed();
 
@@ -19,7 +19,7 @@ const Post = ({post, author}) => {
   // const createdAt = new Date(post.created_at * 1000)
   //   .toISOString()
   //   .split('T')[0];
-  const timestamp = 1682859406; // Unix timestamp in seconds
+  const timestamp = post.created_at; // Unix timestamp in seconds
   const now = new Date(); // current time
   const diffInMs = now.getTime() - timestamp * 1000; // diff in milliseconds
   const diffInMinutes = Math.round(diffInMs / (1000 * 60)); // diff in minutes

@@ -11,6 +11,7 @@ import {insertEventIntoDescendingList} from '../utils/nostrHepers';
 
 export default function useFeed() {
   const relays = useAppSelector(state => state.relays);
+  const {contacts} = useAppSelector(state => state.user);
   const [pool, setPool] = useState<SimplePool | null>(null);
   const [eventsImmediate, setEvents] = useState<Event[]>([]);
   const [feed] = useDebounce(eventsImmediate, 1500);
@@ -19,9 +20,7 @@ export default function useFeed() {
 
   // Setup relay pool.
   useEffect(() => {
-    console.log({relays});
     const _pool = new SimplePool();
-    console.log('set pool', _pool);
     setPool(_pool);
 
     return () => {
@@ -33,22 +32,29 @@ export default function useFeed() {
   // Subscribe to events.
   useEffect(() => {
     if (!pool) {
-      console.log('no pool');
       return;
     }
+
+    console.log({authors})
 
     const sub = pool.sub(relays, [
       {
         kinds: [1],
-        limit: 2,
+        limit: 100,
+        authors: contacts,
       },
     ]);
 
     sub.on('event', (event: Event) => {
-      console.log({event});
+      console.log('event');
       setEvents(prevEvents => insertEventIntoDescendingList(prevEvents, event));
     });
-  }, [pool, relays]);
+
+    sub.on('eose', () => {
+      console.log('eose unsub from events');
+      sub.unsub();
+    });
+  }, [authors, contacts, pool, relays]);
 
   // Get author data.
   useEffect(() => {
@@ -79,6 +85,7 @@ export default function useFeed() {
     });
 
     sub.on('eose', () => {
+      console.log('eose unsub from metadata');
       sub.unsub();
     });
 

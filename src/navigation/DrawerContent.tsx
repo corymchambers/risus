@@ -7,22 +7,23 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {Routes} from './routes';
 import AppText from '../components/AppText';
-import {updateNostrPrivateKey} from '../redux/user/userSlice';
+import {resetUser} from '../redux/user/userSlice';
 import {setPrivateKey} from '../auth/authStorage';
 
 export default function DrawerContent({navigation}): ReactElement {
   const dispatch = useAppDispatch();
   const theme = useAppSelector(state => state.theme.theme);
-  const {nostrPrivateKey} = useAppSelector(state => state.user);
-  // console.log({theme});
+  const {pubKey} = useAppSelector(state => state.user);
+  console.log({pubKey});
   const insets = useSafeAreaInsets();
   const paddingTop = insets.top;
   const backgroundColor = theme.color1;
 
   const backToLoginMethod = async (logout = false) => {
     if (logout) {
-      dispatch(updateNostrPrivateKey(null));
-      await setPrivateKey('');
+      console.log('logout, reset user');
+      dispatch(resetUser());
+      // await setPrivateKey('');
     }
     navigation.navigate(Routes.LoginMethodScreen);
   };
@@ -35,7 +36,7 @@ export default function DrawerContent({navigation}): ReactElement {
         onPress={() => navigation.navigate(Routes.ThemesScreen)}>
         <AppText>Themes</AppText>
       </TouchableOpacity>
-      {nostrPrivateKey ? (
+      {pubKey ? (
         <TouchableOpacity onPress={() => backToLoginMethod(true)}>
           <AppText>Logout</AppText>
         </TouchableOpacity>

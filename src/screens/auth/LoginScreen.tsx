@@ -13,21 +13,60 @@ import {ScreenProps} from '../../navigation/navTypes';
 import AppText from '../../components/AppText';
 import {setIsOnboarded, setPrivateKey} from '../../auth/authStorage';
 import {useAppDispatch} from '../../redux/hooks';
-import {updateNostrPrivateKey} from '../../redux/user/userSlice';
+import {
+  UserKeys,
+  updateNostrPrivateKey,
+  updateUserKeys,
+  updateOnboarded,
+} from '../../redux/user/userSlice';
+import * as secp from '@noble/secp256k1';
+import {getPublicKey, nip19} from 'nostr-tools';
+import useUser from '../../hooks/useUser';
 
 export default function LoginScreen({
   navigation,
   route,
 }: ScreenProps<Routes.LoginScreen>): ReactElement {
   const dispatch = useAppDispatch();
-  const [key, setKey] = useState('');
+
+  const [privateKey, setPrivateKey] = useState('');
+  const {updateProfileContacts} = useUser();
+
   const loginPressed = async () => {
-    await setPrivateKey(key);
-    dispatch(updateNostrPrivateKey(key));
+    //TODO: Add spinner
+    try {
+      const userKeys: UserKeys = {
+        public: '',
+        private: '',
+      };
+
+      if (privateKey.startsWith('nsec')) {
+        const {data} = nip19.decode(privateKey);
+        const hexPrivateKey = data as string;
+        const hexPubkey = getPublicKey(hexPrivateKey);
+        userKeys.private = hexPrivateKey;
+        userKeys.public = hexPubkey;
+      } else {
+        if (secp.utils.isValidPrivateKey(privateKey)) {
+          const hexPrivateKey = privateKey;
+          const hexPubkey = getPublicKey(hexPrivateKey);
+          userKeys.private = hexPrivateKey;
+          userKeys.public = hexPubkey;
+        } else {
+          throw new Error('Invalid private key');
+        }
+      }
+
+      updateProfileContacts(userKeys.public);
+      // const profileContacts updateProfileContacts(userKeys.public);
+      dispatch(updateUserKeys(userKeys));
+    } catch (e) {
+      console.log('error', e);
+      // setError('Invalid private key');
+    }
 
     if (route.params?.onboarded) {
-      console.log('update onboarded');
-      await setIsOnboarded(); // Update storage.
+      dispatch(updateOnboarded('true'));
     }
 
     navigation.navigate(Routes.TabsStack);
@@ -46,8 +85,8 @@ export default function LoginScreen({
         </View>
         <TextInput
           style={styles.input}
-          value={key}
-          onChangeText={setKey}
+          value={privateKey}
+          onChangeText={setPrivateKey}
           placeholder="nsec1..."
           placeholderTextColor="black"
         />

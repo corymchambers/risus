@@ -2,9 +2,9 @@ import {createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
 
 const initialState: string[] = [
-  // 'wss://nostr-pub.wellorder.net',
-  // 'wss://nostr.drss.io',
-  // 'wss://nostr.swiss-enigma.ch',
+  'wss://nostr-pub.wellorder.net',
+  'wss://nostr.drss.io',
+  'wss://nostr.swiss-enigma.ch',
   'wss://relay.damus.io',
 ];
 

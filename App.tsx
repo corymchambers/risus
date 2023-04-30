@@ -3,12 +3,11 @@ import 'react-native-url-polyfill/auto';
 
 import React, {useEffect} from 'react';
 
+import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 
-import {store} from './src/redux/store';
-
+import {persistor, store} from './src/redux/store';
 import {getIsOnboarded} from './src/auth/authStorage';
-
 import Navigator from './src/navigation/Navigator';
 
 function App(): JSX.Element {
@@ -24,7 +23,9 @@ function App(): JSX.Element {
 
   return (
     <Provider store={store}>
-      <Navigator />
+      <PersistGate loading={null} persistor={persistor}>
+        <Navigator />
+      </PersistGate>
     </Provider>
   );
 }
