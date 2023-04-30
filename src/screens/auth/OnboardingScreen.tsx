@@ -12,7 +12,7 @@ export default function OnboardingScreen({navigation}): ReactElement {
   const doneOnboarding = () => {
     // console.log('done');
     // markOnboarded();
-    navigation.navigate(Routes.LoginScreen);
+    navigation.navigate(Routes.LoginMethodScreen);
   };
   return (
     <Onboarding

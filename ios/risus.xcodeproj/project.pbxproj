@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* risusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* risusTests.m */; };
 		0C80B921A6F3F58F76C31292 /* libPods-risus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-risus.a */; };
+		108821C7C0DA42B09804FDBB /* WorkSans-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 372D0CD8ED5C47B5B31487CC /* WorkSans-Thin.otf */; };
+		132612B047494427B3E8113A /* WorkSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC9AD3C71BFF44038A987B2B /* WorkSans-Regular.otf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		20B6D469D54C4972844A5D27 /* WorkSans-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 745B02AE1D7145139C58EE00 /* WorkSans-Light.otf */; };
 		7699B88040F8A987B510C191 /* libPods-risus-risusTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-risus-risusTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		EAF37A5AD2734D33831CEABC /* WorkSans-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = EAAED3F7FF114034899CFCD3 /* WorkSans-ExtraLight.otf */; };
-		20B6D469D54C4972844A5D27 /* WorkSans-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 745B02AE1D7145139C58EE00 /* WorkSans-Light.otf */; };
-		132612B047494427B3E8113A /* WorkSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC9AD3C71BFF44038A987B2B /* WorkSans-Regular.otf */; };
-		108821C7C0DA42B09804FDBB /* WorkSans-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 372D0CD8ED5C47B5B31487CC /* WorkSans-Thin.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,17 +57,17 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = risus/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = risus/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-risus-risusTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-risus-risusTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		372D0CD8ED5C47B5B31487CC /* WorkSans-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "WorkSans-Thin.otf"; path = "../src/assets/fonts/WorkSans-Thin.otf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-risus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-risus.debug.xcconfig"; path = "Target Support Files/Pods-risus/Pods-risus.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-risus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-risus.release.xcconfig"; path = "Target Support Files/Pods-risus/Pods-risus.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-risus-risusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-risus-risusTests.debug.xcconfig"; path = "Target Support Files/Pods-risus-risusTests/Pods-risus-risusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-risus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-risus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		745B02AE1D7145139C58EE00 /* WorkSans-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "WorkSans-Light.otf"; path = "../src/assets/fonts/WorkSans-Light.otf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = risus/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-risus-risusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-risus-risusTests.release.xcconfig"; path = "Target Support Files/Pods-risus-risusTests/Pods-risus-risusTests.release.xcconfig"; sourceTree = "<group>"; };
+		AC9AD3C71BFF44038A987B2B /* WorkSans-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "WorkSans-Regular.otf"; path = "../src/assets/fonts/WorkSans-Regular.otf"; sourceTree = "<group>"; };
+		EAAED3F7FF114034899CFCD3 /* WorkSans-ExtraLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "WorkSans-ExtraLight.otf"; path = "../src/assets/fonts/WorkSans-ExtraLight.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		EAAED3F7FF114034899CFCD3 /* WorkSans-ExtraLight.otf */ = {isa = PBXFileReference; name = "WorkSans-ExtraLight.otf"; path = "../src/assets/fonts/WorkSans-ExtraLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		745B02AE1D7145139C58EE00 /* WorkSans-Light.otf */ = {isa = PBXFileReference; name = "WorkSans-Light.otf"; path = "../src/assets/fonts/WorkSans-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		AC9AD3C71BFF44038A987B2B /* WorkSans-Regular.otf */ = {isa = PBXFileReference; name = "WorkSans-Regular.otf"; path = "../src/assets/fonts/WorkSans-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		372D0CD8ED5C47B5B31487CC /* WorkSans-Thin.otf */ = {isa = PBXFileReference; name = "WorkSans-Thin.otf"; path = "../src/assets/fonts/WorkSans-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +198,7 @@
 			sourceTree = "<group>";
 		};
 		D81A86CE6DE440829E534AED /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				EAAED3F7FF114034899CFCD3 /* WorkSans-ExtraLight.otf */,
 				745B02AE1D7145139C58EE00 /* WorkSans-Light.otf */,
@@ -206,8 +206,8 @@
 				372D0CD8ED5C47B5B31487CC /* WorkSans-Thin.otf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
 			path = "";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 

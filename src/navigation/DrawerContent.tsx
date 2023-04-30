@@ -4,15 +4,28 @@ import {Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {useAppSelector} from '../redux/hooks';
+import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {Routes} from './routes';
+import AppText from '../components/AppText';
+import {updateNostrPrivateKey} from '../redux/user/userSlice';
+import {setPrivateKey} from '../auth/authStorage';
 
 export default function DrawerContent({navigation}): ReactElement {
+  const dispatch = useAppDispatch();
   const theme = useAppSelector(state => state.theme.theme);
+  const {nostrPrivateKey} = useAppSelector(state => state.user);
   // console.log({theme});
   const insets = useSafeAreaInsets();
   const paddingTop = insets.top;
   const backgroundColor = theme.color1;
+
+  const backToLoginMethod = async (logout = false) => {
+    if (logout) {
+      dispatch(updateNostrPrivateKey(null));
+      await setPrivateKey('');
+    }
+    navigation.navigate(Routes.LoginMethodScreen);
+  };
 
   return (
     <DrawerContentScrollView
@@ -20,10 +33,19 @@ export default function DrawerContent({navigation}): ReactElement {
       <Image source={theme.logoSrc} style={styles.image} resizeMode="contain" />
       <TouchableOpacity
         onPress={() => navigation.navigate(Routes.ThemesScreen)}>
-        <Text style={styles.itemText}>Themes</Text>
+        <AppText>Themes</AppText>
       </TouchableOpacity>
-      <Text style={styles.itemText}>Drawer Item 2asdfwd</Text>
-      <Text style={styles.itemText}>Drawer Item 3asdfasdfsd</Text>
+      {nostrPrivateKey ? (
+        <TouchableOpacity onPress={() => backToLoginMethod(true)}>
+          <AppText>Logout</AppText>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={backToLoginMethod}>
+          <AppText>Login/Signup</AppText>
+        </TouchableOpacity>
+      )}
+      <AppText>Drawer Item 2asdfwd</AppText>
+      <AppText>Drawer Item 3asdfasdfsd</AppText>
     </DrawerContentScrollView>
   );
 }

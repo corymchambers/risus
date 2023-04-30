@@ -1,4 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import { Routes } from './routes';
 
 declare global {
   namespace ReactNavigatoin {
@@ -8,12 +9,18 @@ declare global {
 
 export type RootStackParamList = {
   FeedScreen: undefined;
-  LoginScreen: undefined;
+  LoginScreen: {
+    onboarded?: boolean;
+  };
+  LoginMethodScreen: undefined;
   Tabs: undefined;
   MessagesScreen: undefined;
   OnboardingScreen: undefined;
   SearchScreen: undefined;
-  TermsScreen: undefined;
+  SplashScreen: undefined;
+  TermsScreen: {
+    navOnAccept: Routes;
+  };
   ThemesScreen: undefined;
   TrendingScreen: undefined;
 };

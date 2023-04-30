@@ -4,26 +4,44 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 import useFeed from '../../hooks/useFeed';
 import {useAppSelector} from '../../redux/hooks';
 import {LinkPreview} from '@flyerhq/react-native-link-preview';
-import reactotron from 'reactotron-react-native';
 
 // create a component
-const Post = ({post}) => {
+const Post = ({post, author}) => {
+  console.log({post});
+  console.log({author});
   const theme = useAppSelector(state => state.theme.theme);
   const {displayPubkey} = useFeed();
-  reactotron.log(post?.id);
 
-  const regex = /https?:\/\/.*\.(?:png|jpg|jpeg|gif)/gi;
+  const name = author?.display_name ?? displayPubkey(post.pubkey);
+  const image = author?.picture
+    ? {uri: author?.picture}
+    : require('../../assets/images/logo-icon-small.png');
+  // const createdAt = new Date(post.created_at * 1000)
+  //   .toISOString()
+  //   .split('T')[0];
+  const timestamp = 1682859406; // Unix timestamp in seconds
+  const now = new Date(); // current time
+  const diffInMs = now.getTime() - timestamp * 1000; // diff in milliseconds
+  const diffInMinutes = Math.round(diffInMs / (1000 * 60)); // diff in minutes
 
-  // Extract the image URL from the text string
-  const match = regex.exec(post?.content);
-  // console.log(match);
+  let formattedDate;
 
-  const name = post?.display_name ?? displayPubkey(post.pubkey);
-  const image =
-    post?.picture ?? `https://dicebear.com/api/initials/${post.pubkey}.svg`;
-  const createdAt = new Date(post.created_at * 1000)
-    .toISOString()
-    .split('T')[0];
+  if (diffInMinutes < 60) {
+    formattedDate = `${diffInMinutes} minutes ago`;
+  } else {
+    const date = new Date(timestamp * 1000); // convert seconds to milliseconds
+    // format the date and time as a string in mm/dd/yyyy format with 12-hour clock and AM/PM
+    formattedDate = `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date
+      .getDate()
+      .toString()
+      .padStart(2, '0')}/${date.getFullYear()} ${(date.getHours() % 12 || 12)
+      .toString()
+      .padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date
+      .getSeconds()
+      .toString()
+      .padStart(2, '0')} ${date.getHours() < 12 ? 'AM' : 'PM'}`;
+  }
+
   const tags = post.tags.filter(t => t[0] === 't').map(t => t[1]);
   return (
     <View
@@ -33,12 +51,12 @@ const Post = ({post}) => {
       <View style={styles.profileContainer}>
         {/* Profile pic */}
         <View>
-          {image && <Image style={styles.profilePic} source={{uri: image}} />}
+          {image && <Image style={styles.profilePic} source={image} />}
         </View>
         {/* Name/Date */}
         <View style={styles.userContainer}>
           <Text style={styles.name}>{name}</Text>
-          <Text style={styles.createdAt}>{createdAt}</Text>
+          <Text style={styles.createdAt}>{formattedDate}</Text>
         </View>
       </View>
       {/* Content */}
@@ -50,21 +68,9 @@ const Post = ({post}) => {
         ))}
       </View>
     </View>
-    // <View style={{borderWidth: 1, marginTop: 8, backgroundColor: theme.color3}}>
-    //   <Text style={{color: 'red', fontWeight: 'bold'}}>
-    //     {post?.display_name ?? 'No Name'}
-    //   </Text>
-    //   {image && <Image width={25} height={25} source={{uri: image}} />}
-    //   <Text>{createdAt}</Text>
-    //   <Text>{post?.content}</Text>
-    // {tags.map(t => (
-    //   <Text>#{t}</Text>
-    // ))}
-    // </View>
   );
 };
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,

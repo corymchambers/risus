@@ -1,7 +1,7 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
-#import "RNSplashScreen.h"
+// #import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -14,7 +14,7 @@
 
   bool didFinish = [super application:application didFinishLaunchingWithOptions:launchOptions];
 
-  [RNSplashScreen show]; 
+  // [RNSplashScreen show]; 
 
   return didFinish;
 }

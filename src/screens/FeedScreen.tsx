@@ -5,12 +5,12 @@ import {FlatList} from 'react-native-gesture-handler';
 import Post from '../components/feed/Post';
 import useFeed from '../hooks/useFeed';
 import {useAppSelector} from '../redux/hooks';
-import { FlashList } from '@shopify/flash-list';
+import {FlashList} from '@shopify/flash-list';
 
 export default function FeedScreen() {
   const theme = useAppSelector(state => state.theme.theme);
 
-  const {feed} = useFeed();
+  const {feed, authors} = useFeed();
   // console.log({feed})
 
   // const feed = [
@@ -68,7 +68,9 @@ export default function FeedScreen() {
       /> */}
       <FlashList
         data={feed}
-        renderItem={({item}) => <Post post={item} />}
+        renderItem={({item}) => (
+          <Post post={item} author={authors[item.pubkey]} />
+        )}
         estimatedItemSize={200}
       />
     </View>

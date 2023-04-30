@@ -3,12 +3,14 @@ import {configureStore} from '@reduxjs/toolkit';
 import themeReducer from './theme/themeSlice';
 import relayReducer from './nostr/relaysSlice';
 import authorsReducer from './nostr/authorsSlice';
+import userReducer from './user/userSlice';
 
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
     relays: relayReducer,
     authors: authorsReducer,
+    user: userReducer,
   },
 });
 

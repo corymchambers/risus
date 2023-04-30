@@ -6,18 +6,30 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import AppButton from '../../components/AppButton';
-import AuthContext from '../../auth/authContext';
-import {setIsOnboarded} from '../../auth/authStorage';
 
-export default function TermsScreen({navigation}): ReactElement {
-  const {setOnboarded} = useContext(AuthContext);
+import {SafeAreaView} from 'react-native-safe-area-context';
+
+import AppButton from '../../components/AppButton';
+import {setIsOnboarded} from '../../auth/authStorage';
+import {ScreenProps} from '../../navigation/navTypes';
+import {Routes} from '../../navigation/routes';
+import {useAppDispatch} from '../../redux/hooks';
+
+export default function TermsScreen({
+  navigation,
+  route,
+}: ScreenProps<Routes.TermsScreen>): ReactElement {
+  const navTo = route.params?.navOnAccept;
 
   const acceptPressed = async () => {
-    await setIsOnboarded();
-    setOnboarded(true);
+    if (navTo === Routes.FeedScreen) {
+      await setIsOnboarded(); // Update storage.
+      navigation.navigate(Routes.TabsStack);
+    } else if (navTo === Routes.LoginScreen) {
+      navigation.navigate(Routes.LoginScreen, {onboarded: true});
+    }
   };
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <SafeAreaView style={styles.container}>
@@ -126,7 +138,6 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     backgroundColor: '#000007',
-    // flex: 1,
     minHeight: '100%',
   },
   section: {
