@@ -24,7 +24,6 @@ export default function useFeed() {
     setPool(_pool);
 
     return () => {
-      console.log('CLOSE DOWN POOLS');
       _pool.close(relays);
     };
   }, [relays]);
@@ -35,8 +34,6 @@ export default function useFeed() {
       return;
     }
 
-    console.log({authors})
-
     const sub = pool.sub(relays, [
       {
         kinds: [1],
@@ -46,15 +43,13 @@ export default function useFeed() {
     ]);
 
     sub.on('event', (event: Event) => {
-      console.log('event');
       setEvents(prevEvents => insertEventIntoDescendingList(prevEvents, event));
     });
 
     sub.on('eose', () => {
-      console.log('eose unsub from events');
       sub.unsub();
     });
-  }, [authors, contacts, pool, relays]);
+  }, [contacts, pool, relays]);
 
   // Get author data.
   useEffect(() => {
@@ -85,7 +80,6 @@ export default function useFeed() {
     });
 
     sub.on('eose', () => {
-      console.log('eose unsub from metadata');
       sub.unsub();
     });
 

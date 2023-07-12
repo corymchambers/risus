@@ -14,20 +14,16 @@ export interface Authors {
 
 const initialState: Authors = {};
 
-export const themeSlice = createSlice({
+export const authorsSlice = createSlice({
   name: 'authors',
   initialState,
   reducers: {
     updateAuthors: (state, action: PayloadAction<Authors[]>) => {
-    //   console.log('update authors', action);
-      //   state = {...state, [action.payload.pubkey]: action.payload.metadata};
-      state = {bob: 'some datate about bob'};
-    //   console.log('new state', state);
-      //   state = action.payload;
+      state = action.payload;
     },
   },
 });
 
-export const {updateAuthors} = themeSlice.actions;
+export const {updateAuthors} = authorsSlice.actions;
 
-export default themeSlice.reducer;
+export default authorsSlice.reducer;

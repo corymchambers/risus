@@ -19,7 +19,7 @@ import userReducer from './user/userSlice';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['theme, user'],
+  // whitelist: ['theme, user'],
 };
 
 const rootReducer = combineReducers({

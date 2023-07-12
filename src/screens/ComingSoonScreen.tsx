@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {Theme} from '../styles/Theme';
 import {useTheme} from '../hooks/useTheme';
 
-export default function MessagesScreen(): ReactElement {
+export default function ComingSoonScreen(): ReactElement {
   const {theme} = useTheme();
   return (
     <View

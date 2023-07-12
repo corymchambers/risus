@@ -18,14 +18,13 @@ export const setIsOnboarded = async () => {
   try {
     await AsyncStorage.setItem(ONBOARD_KEY, 'TRUE');
   } catch {
-    // Log an error.
+    console.error('error setting onboarded');
   }
 };
 
 export const getPrivateKey = async () => {
   try {
     const session = await EncryptedStorage.getItem(NOSTR_PRIVATE_KEY);
-    console.log({session});
 
     if (session !== undefined) {
       return session;
@@ -33,8 +32,6 @@ export const getPrivateKey = async () => {
 
     return null;
   } catch (error) {
-    console.error('error getting private key');
-    // There was an error on the native side
     return null;
   }
 };
@@ -42,11 +39,7 @@ export const getPrivateKey = async () => {
 export const setPrivateKey = async (key: string) => {
   try {
     await EncryptedStorage.setItem(NOSTR_PRIVATE_KEY, key);
-    console.log('set the kery');
-    // Congrats! You've just stored your first value!
   } catch (error) {
     console.error('error setting private key');
-
-    // There was an error on the native side
   }
 };

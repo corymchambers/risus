@@ -1,11 +1,12 @@
 import React, {ReactElement} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 interface Props {
   title: string;
   onPress: () => void;
   color?: string | null;
 }
+
 export default function AppButton({
   title,
   onPress,

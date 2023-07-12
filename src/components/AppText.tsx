@@ -12,12 +12,7 @@ interface Props {
   color?: string;
 }
 
-export default function AppText({
-  children,
-  style,
-  size,
-  color,
-}: Props): ReactElement {
+export default function AppText({children, size, color}: Props): ReactElement {
   let styleOverrides = {};
   styleOverrides = size ? {...styleOverrides, fontSize: size} : styleOverrides;
   styleOverrides = color ? {...styleOverrides, color} : styleOverrides;

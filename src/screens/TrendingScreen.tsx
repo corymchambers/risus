@@ -1,14 +1,28 @@
 import React, {ReactElement} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-export default function TrendingScreen(props): ReactElement {
+import {Theme} from '../styles/Theme';
+import {useTheme} from '../hooks/useTheme';
+
+export default function TrendingScreen(): ReactElement {
+  const {theme} = useTheme();
+
   return (
-    <View style={styles.container}>
-      <Text>trending</Text>
+    <View
+      style={[Theme.container, styles.center, {backgroundColor: theme.color1}]}>
+      <Text style={styles.text}>Coming Soon!</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  center: {
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: 'white',
+    fontSize: 24,
+  },
 });

@@ -1,16 +1,17 @@
 import React, {ReactElement} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {updateTheme} from '../redux/theme/themeSlice';
 import * as t from '../theme/themes';
 
-export default function ThemesScreen(props): ReactElement {
+export default function ThemesScreen(): ReactElement {
   const theme = useAppSelector(state => state.theme.theme);
   const dispatch = useAppDispatch();
   const updatePressed = (newTheme: t.Theme) => {
     dispatch(updateTheme(newTheme));
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.sampleContainer}>

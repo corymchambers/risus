@@ -1,7 +1,5 @@
-import {Filter, Relay, SimplePool, getEventHash, signEvent} from 'nostr-tools';
-import {NostrEvent, NostrFilter} from './types';
-
-import * as secp256k1 from '@noble/secp256k1';
+import {Filter, SimplePool, getEventHash, signEvent} from 'nostr-tools';
+import {NostrEvent} from './types';
 
 // Reset the nobel and nostr tools package and try to replace the random bytes, if no use exporandom
 export const singleNostrEvent = async (
@@ -37,19 +35,12 @@ export const publishNostrEvent = async (
       content: post,
       tags: [],
     };
-    console.log('get event hash', newEvent);
     newEvent.id = getEventHash(newEvent);
-    console.log('passed event hash');
-    // @ts-expect-error
-    console.log('sign event', privateKey, newEvent);
     newEvent.sig = signEvent(newEvent, privateKey);
-    console.log('create pool');
     const pool = new SimplePool();
-    console.log('publish', newEvent);
     let pubs = pool.publish(relays, newEvent);
     pubs.on('ok', () => {
       // this may be called multiple times, once for every relay that accepts the event
-      // ...
-      console.log('yay it worked');
+      console.log('successful');
     });
   });

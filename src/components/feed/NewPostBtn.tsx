@@ -11,6 +11,7 @@ interface Props {
 
 export default function NewPostBtn({onPress}: Props): ReactElement {
   const {theme} = useAppSelector(state => state.theme);
+
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Ionicons name="add" size={36} color={theme.color5} />

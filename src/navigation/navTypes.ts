@@ -8,6 +8,7 @@ declare global {
 }
 
 export type RootStackParamList = {
+  ComingSoonScreen: undefined;
   FeedScreen: undefined;
   LoginScreen: {
     onboarded?: boolean;

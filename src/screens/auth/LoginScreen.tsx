@@ -58,11 +58,9 @@ export default function LoginScreen({
       }
 
       updateProfileContacts(userKeys.public);
-      // const profileContacts updateProfileContacts(userKeys.public);
       dispatch(updateUserKeys(userKeys));
     } catch (e) {
       console.log('error', e);
-      // setError('Invalid private key');
     }
 
     if (route.params?.onboarded) {
@@ -90,7 +88,7 @@ export default function LoginScreen({
           placeholder="nsec1..."
           placeholderTextColor="black"
         />
-        <View style={{width: '100%', marginTop: 16}}>
+        <View style={styles.loginBtnContainer}>
           <AppButton title="Login" onPress={loginPressed} />
         </View>
         <TouchableOpacity
@@ -103,6 +101,10 @@ export default function LoginScreen({
 }
 
 const styles = StyleSheet.create({
+  loginBtnContainer: {
+    width: '100%',
+    marginTop: 16,
+  },
   container: {
     flex: 1,
     alignItems: 'center',

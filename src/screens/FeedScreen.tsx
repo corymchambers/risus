@@ -1,14 +1,22 @@
-import React, {useLayoutEffect, useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import 'text-encoding-polyfill';
+
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {View} from 'react-native';
 
 import Post from '../components/feed/Post';
-import useFeed from '../hooks/useFeed';
 import {useAppSelector} from '../redux/hooks';
 import {FlashList} from '@shopify/flash-list';
 import NewPostBtn from '../components/feed/NewPostBtn';
 import {ScreenProps} from '../navigation/navTypes';
 import {Routes} from '../navigation/routes';
 import NewPostModal from '../components/feed/NewPostModal';
+import {Theme} from '../styles/Theme';
+import {useTheme} from '../hooks/useTheme';
+import reactotron from 'reactotron-react-native';
+import {Event, SimplePool} from 'nostr-tools';
+import {insertEventIntoDescendingList} from '../utils/nostrHepers';
+import {useDebounce} from 'use-debounce';
+import {Metadata} from '../redux/nostr/authorsSlice';
 
 const NewPost = (newPostPressed: () => void) => (
   <NewPostBtn onPress={newPostPressed} />
@@ -17,10 +25,83 @@ const NewPost = (newPostPressed: () => void) => (
 export default function FeedScreen({
   navigation,
 }: ScreenProps<Routes.FeedScreen>) {
-  const theme = useAppSelector(state => state.theme.theme);
-  const [modalVisible, setModalVisible] = useState(false);
+  const relays = useAppSelector(state => state.relays);
+  const {contacts} = useAppSelector(state => state.user);
 
-  const {feed, authors} = useFeed();
+  const {theme} = useTheme();
+  const [modalVisible, setModalVisible] = useState(false);
+  const metadataFetched = useRef<Record<string, boolean>>({});
+  const [authors, setAuthors] = useState<Record<string, Metadata>>({});
+
+  const [pool, setPool] = useState<SimplePool | null>(null);
+  const [eventsImmediate, setEvents] = useState<Event[]>([]);
+  const [feed] = useDebounce(eventsImmediate, 1500);
+
+  useEffect(() => {
+    const _pool = new SimplePool();
+    setPool(_pool);
+
+    return () => {
+      // console.log('CLOSE DOWN POOLS');
+      _pool.close(relays);
+    };
+  }, [relays]);
+
+  useEffect(() => {
+    if (!pool) {
+      return;
+    }
+
+    const sub = pool.sub(relays, [
+      {
+        kinds: [1],
+        limit: 100,
+        authors: contacts,
+      },
+    ]);
+
+    sub.on('event', (event: Event) => {
+      setEvents(prevEvents => insertEventIntoDescendingList(prevEvents, event));
+    });
+
+    sub.on('eose', () => {
+      sub.unsub();
+    });
+  }, [contacts, pool, relays]);
+
+  useEffect(() => {
+    if (!pool) {
+      return;
+    }
+
+    const pubkeysToFetch = feed
+      .filter(event => metadataFetched.current[event.pubkey] !== true)
+      .map(event => event.pubkey);
+
+    pubkeysToFetch.forEach(pubkey => (metadataFetched.current[pubkey] = true));
+
+    const sub = pool.sub(relays, [
+      {
+        kinds: [0],
+        authors: pubkeysToFetch,
+      },
+    ]);
+
+    sub.on('event', (event: Event) => {
+      const metadata = JSON.parse(event.content) as Metadata;
+
+      setAuthors(cur => ({
+        ...cur,
+        [event.pubkey]: metadata,
+      }));
+    });
+
+    sub.on('eose', () => {
+      sub.unsub();
+    });
+
+    return () => {};
+  }, [feed, pool, relays]);
 
   const newPostPressed = () => {
     setModalVisible(true);
@@ -33,7 +114,7 @@ export default function FeedScreen({
   });
 
   return (
-    <View style={[styles.container, {backgroundColor: theme.color1}]}>
+    <View style={[Theme.container, {backgroundColor: theme.color1}]}>
       <FlashList
         data={feed}
         renderItem={({item}) => (
@@ -48,9 +129,3 @@ export default function FeedScreen({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

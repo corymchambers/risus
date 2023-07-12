@@ -27,7 +27,6 @@ export function insertEventIntoDescendingList<T extends Event>(
       } else if (sortedArray[midPoint].created_at < event.created_at) {
         end = midPoint;
       } else {
-        // aMidPoint === num
         position = midPoint;
         break;
       }

@@ -1,4 +1,5 @@
 export enum Routes {
+  ComingSoonScreen = 'ComingSoonScreen',
   FeedScreen = 'FeedScreen',
   LoginMethodScreen = 'LoginMethodScreen',
   LoginScreen = 'LoginScreen',

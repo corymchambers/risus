@@ -1,4 +1,4 @@
-import React, {ReactElement, useContext} from 'react';
+import React, {ReactElement} from 'react';
 import {
   View,
   Text,
@@ -13,7 +13,6 @@ import AppButton from '../../components/AppButton';
 import {setIsOnboarded} from '../../auth/authStorage';
 import {ScreenProps} from '../../navigation/navTypes';
 import {Routes} from '../../navigation/routes';
-import {useAppDispatch} from '../../redux/hooks';
 
 export default function TermsScreen({
   navigation,

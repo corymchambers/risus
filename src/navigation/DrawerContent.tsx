@@ -1,5 +1,5 @@
 import React, {ReactElement} from 'react';
-import {Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 import {DrawerContentScrollView} from '@react-navigation/drawer';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -8,24 +8,24 @@ import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {Routes} from './routes';
 import AppText from '../components/AppText';
 import {resetUser} from '../redux/user/userSlice';
-import {setPrivateKey} from '../auth/authStorage';
 
 export default function DrawerContent({navigation}): ReactElement {
   const dispatch = useAppDispatch();
   const theme = useAppSelector(state => state.theme.theme);
   const {pubKey} = useAppSelector(state => state.user);
-  console.log({pubKey});
   const insets = useSafeAreaInsets();
   const paddingTop = insets.top;
   const backgroundColor = theme.color1;
 
   const backToLoginMethod = async (logout = false) => {
     if (logout) {
-      console.log('logout, reset user');
       dispatch(resetUser());
-      // await setPrivateKey('');
     }
     navigation.navigate(Routes.LoginMethodScreen);
+  };
+
+  const comingSoonPressed = () => {
+    navigation.navigate(Routes.ComingSoonScreen);
   };
 
   return (
@@ -45,8 +45,9 @@ export default function DrawerContent({navigation}): ReactElement {
           <AppText>Login/Signup</AppText>
         </TouchableOpacity>
       )}
-      <AppText>Drawer Item 2asdfwd</AppText>
-      <AppText>Drawer Item 3asdfasdfsd</AppText>
+      <TouchableOpacity onPress={comingSoonPressed}>
+        <AppText>Coming Soon</AppText>
+      </TouchableOpacity>
     </DrawerContentScrollView>
   );
 }

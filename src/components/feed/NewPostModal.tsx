@@ -18,8 +18,14 @@ export default function NewPostModal({
   const {theme} = useAppSelector(state => state.theme);
   const [message, setMessage] = useState('');
   const {createPost} = useCreatePost();
+
+  const createPostPressed = () => {
+    createPost(message);
+    setModalVisible(false);
+  };
+
   return (
-    <Modal visible={modalVisible} animationType="slide" transparent={true}>
+    <Modal visible={modalVisible} animationType="fade" transparent={true}>
       <View style={styles.modalContainer}>
         <View style={[styles.modal, {backgroundColor: theme.color1}]}>
           <Pressable
@@ -35,8 +41,8 @@ export default function NewPostModal({
             placeholderTextColor="black"
             multiline={true}
           />
-          <View style={{width: '100%', marginTop: 16}}>
-            <AppButton title="Submit" onPress={() => createPost(message)} />
+          <View style={styles.submitBtnContainer}>
+            <AppButton title="Submit" onPress={createPostPressed} />
           </View>
         </View>
       </View>
@@ -45,6 +51,13 @@ export default function NewPostModal({
 }
 
 const styles = StyleSheet.create({
+  closeButton: {
+    backgroundColor: '#2196F3',
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    color: 'white',
+  },
   exitBtnContainer: {
     alignSelf: 'flex-end',
   },
@@ -55,18 +68,6 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 16,
   },
-  openButton: {
-    backgroundColor: '#F194FF',
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  modalContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
   modal: {
     borderRadius: 20,
     padding: 16,
@@ -75,15 +76,24 @@ const styles = StyleSheet.create({
     width: '90%',
     height: '60%',
   },
+  modalContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
   },
-  closeButton: {
-    backgroundColor: '#2196F3',
+  openButton: {
+    backgroundColor: '#F194FF',
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    color: 'white',
+  },
+  submitBtnContainer: {
+    width: '100%',
+    marginTop: 16,
   },
 });

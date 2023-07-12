@@ -1,5 +1,3 @@
-import {singleNostrEvent} from '../nostr/singleEvent';
-import {Kinds} from '../nostr/types';
 import {useAppDispatch, useAppSelector} from '../redux/hooks';
 import {getContacts} from '../nostr/contacts';
 import {getProfile} from '../nostr/profile';
@@ -21,13 +19,12 @@ export default function useUser() {
         getContacts(relays, pubKey),
       ]);
 
-      console.log('results', profile, contacts);
       dispatch(updateContacts(contacts));
       dispatch(updateUserInfo(profile));
 
       return true;
     } catch {
-      console.log('something bad happened');
+      console.error('Error getting profile or contacts');
     }
   };
   return {updateProfileContacts};

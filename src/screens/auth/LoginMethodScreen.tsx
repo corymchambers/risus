@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     backgroundColor: '#000007',
-    // flex: 1,
     minHeight: '100%',
   },
   text: {

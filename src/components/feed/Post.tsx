@@ -1,24 +1,21 @@
-//import liraries
-import React, {Component} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
-import useFeed from '../../hooks/useFeed';
-import {useAppSelector} from '../../redux/hooks';
+
+import {nip19} from 'nostr-tools';
 import {LinkPreview} from '@flyerhq/react-native-link-preview';
 
-// create a component
-const Post = ({post, author}) => {
-  // console.log({post});
-  // console.log({author});
-  const theme = useAppSelector(state => state.theme.theme);
-  const {displayPubkey} = useFeed();
+import {useAppSelector} from '../../redux/hooks';
 
-  const name = author?.display_name ?? displayPubkey(post.pubkey);
+const Post = ({post, author}) => {
+  const theme = useAppSelector(state => state.theme.theme);
+
+  const name =
+    author?.name ?? `${nip19.npubEncode(post.pubkey).slice(0, 10)}...`;
+
   const image = author?.picture
     ? {uri: author?.picture}
     : require('../../assets/images/logo-icon-small.png');
-  // const createdAt = new Date(post.created_at * 1000)
-  //   .toISOString()
-  //   .split('T')[0];
+
   const timestamp = post.created_at; // Unix timestamp in seconds
   const now = new Date(); // current time
   const diffInMs = now.getTime() - timestamp * 1000; // diff in milliseconds
@@ -107,5 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//make this component available to the app
 export default Post;

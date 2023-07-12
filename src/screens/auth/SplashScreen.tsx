@@ -1,5 +1,5 @@
 import React, {ReactElement, useEffect, useCallback} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 
 import {getIsOnboarded, getPrivateKey} from '../../auth/authStorage';
 import {useAppDispatch} from '../../redux/hooks';
@@ -36,7 +36,7 @@ export default function SplashScreen({
   return (
     <View style={styles.container}>
       <Image
-        style={{borderWidth: 0, borderColor: 'white', bottom: '20%'}}
+        style={styles.image}
         source={require('../../assets/images/logo-small.png')}
       />
     </View>
@@ -49,7 +49,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // borderWidth: 1,
     borderColor: 'white',
+  },
+  image: {
+    borderColor: 'white',
+    bottom: '20%',
   },
 });

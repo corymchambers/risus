@@ -2,7 +2,6 @@ import React, {ReactElement} from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {useAppSelector} from '../redux/hooks';

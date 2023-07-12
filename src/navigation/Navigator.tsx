@@ -21,6 +21,7 @@ import {useAppSelector} from '../redux/hooks';
 import ThemesScreen from '../screens/ThemesScreen';
 import LoginScreen from '../screens/auth/LoginScreen';
 import SplashScreen from '../screens/auth/SplashScreen';
+import ComingSoonScreen from '../screens/ComingSoonScreen';
 
 const Drawer = createDrawerNavigator<RootStackParamList>();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -41,9 +42,18 @@ function DrawerNav() {
 const StackNavigator = () => {
   return (
     <Stack.Navigator
+      initialRouteName={Routes.SplashScreen}
       screenOptions={() => ({
         headerShown: false,
       })}>
+      <Stack.Screen
+        name={Routes.ComingSoonScreen}
+        component={ComingSoonScreen}
+        options={() => ({
+          headerShown: true,
+          title: 'Coming Soon',
+        })}
+      />
       <Stack.Screen name={Routes.SplashScreen} component={SplashScreen} />
       <Stack.Screen name={Routes.TabsStack} component={TabNav} />
       <Stack.Screen
@@ -117,7 +127,6 @@ function TabNav() {
 }
 
 function Navigator() {
-
   return (
     <NavigationContainer>
       <DrawerNav />
