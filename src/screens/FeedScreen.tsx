@@ -3,19 +3,19 @@ import 'text-encoding-polyfill';
 import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {View} from 'react-native';
 
+import {FlashList} from '@shopify/flash-list';
+import {useDebounce} from 'use-debounce';
+import {Event, SimplePool} from 'nostr-tools';
+
 import Post from '../components/feed/Post';
 import {useAppSelector} from '../redux/hooks';
-import {FlashList} from '@shopify/flash-list';
 import NewPostBtn from '../components/feed/NewPostBtn';
 import {ScreenProps} from '../navigation/navTypes';
 import {Routes} from '../navigation/routes';
 import NewPostModal from '../components/feed/NewPostModal';
 import {Theme} from '../styles/Theme';
 import {useTheme} from '../hooks/useTheme';
-import reactotron from 'reactotron-react-native';
-import {Event, SimplePool} from 'nostr-tools';
 import {insertEventIntoDescendingList} from '../utils/nostrHepers';
-import {useDebounce} from 'use-debounce';
 import {Metadata} from '../redux/nostr/authorsSlice';
 
 const NewPost = (newPostPressed: () => void) => (
